@@ -372,6 +372,7 @@
         "customChoice": "Drop or upload file",
         "customizeLabel": "Customize",
         "offChoice": "Off",
+        "SourceChoice": "Source Captions",
         "OpenSubtitlesChoice": "OpenSubtitles",
         "settings": {
           "backlink": "Custom subtitles",
@@ -382,7 +383,8 @@
         "unknownLanguage": "Unknown",
         "dropSubtitleFile": "Drop subtitle file here! >_<",
         "scrapeButton": "Scrape subtitles",
-        "empty": "There are no provided subtitles for this."
+        "empty": "There are no provided subtitles for this.",
+        "notFound": "None of the available options match your query"
       }
     },
     "metadata": {
@@ -538,7 +540,7 @@
       "register": {
         "cta": "Get started",
         "text": "Share your watch progress between devices and keep them synced. ( ̧⸝⸝⍢⸝⸝)ෆ",
-        "title": "Sync to the cloud"
+        "title": "Sync to the sudo-cloud"
       },
       "title": "Account"
     },
