@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -12,9 +12,6 @@ import { MediaItem } from "@/utils/mediaTypes";
 import { MediaBookmarkButton } from "./MediaBookmark";
 import { IconPatch } from "../buttons/IconPatch";
 import { Icon, Icons } from "../Icon";
-
-// Constants
-const LONG_PRESS_DURATION = 500; // 0.5 seconds
 
 export interface MediaCardProps {
   media: MediaItem;
@@ -79,140 +76,127 @@ function MediaCardContent({
       tabIndex={canLink ? 0 : -1}
       onKeyUp={(e) => e.key === "Enter" && e.currentTarget.click()}
     >
-      <div
-        className="relative"
-        onContextMenu={(e: React.MouseEvent<HTMLDivElement>) =>
-          e.preventDefault()
-        } // Prevent right-click context menu
-        onTouchStart={(e: React.TouchEvent<HTMLDivElement>) =>
-          e.preventDefault()
-        } // Prevent long press context menu on mobile
+      <Flare.Light
+        flareSize={300}
+        cssColorVar="--colors-mediaCard-hoverAccent"
+        backgroundClass="bg-mediaCard-hoverBackground duration-100"
+        className={classNames({
+          "rounded-xl bg-background-main group-hover:opacity-100": canLink,
+        })}
+      />
+      <Flare.Child
+        className={`pointer-events-auto relative mb-2 p-[0.4em] transition-transform duration-300 ${
+          canLink ? "group-hover:scale-95" : "opacity-60"
+        }`}
       >
-        <Flare.Light
-          flareSize={300}
-          cssColorVar="--colors-mediaCard-hoverAccent"
-          backgroundClass="bg-mediaCard-hoverBackground duration-100"
-          className={classNames({
-            "rounded-xl bg-background-main group-hover:opacity-100": canLink,
-          })}
-        />
-        <Flare.Child
-          className={`pointer-events-auto relative mb-2 p-[0.4em] transition-transform duration-300 ${
-            canLink ? "group-hover:scale-95" : "opacity-60"
-          }`}
+        <div
+          className={classNames(
+            "relative mb-4 pb-[150%] w-full overflow-hidden rounded-xl bg-mediaCard-hoverBackground bg-cover bg-center transition-[border-radius] duration-300",
+            {
+              "group-hover:rounded-lg": canLink,
+            },
+          )}
+          style={{
+            backgroundImage: media.poster ? `url(${media.poster})` : undefined,
+          }}
         >
-          <div
-            className={classNames(
-              "relative mb-4 pb-[150%] w-full overflow-hidden rounded-xl bg-mediaCard-hoverBackground bg-cover bg-center transition-[border-radius] duration-300",
-              {
-                "group-hover:rounded-lg": canLink,
-              },
-            )}
-            style={{
-              backgroundImage: media.poster
-                ? `url(${media.poster})`
-                : undefined,
-            }}
-          >
-            {series ? (
-              <div
+          {series ? (
+            <div
+              className={[
+                "absolute right-2 top-2 rounded-md bg-mediaCard-badge px-2 py-1 transition-colors",
+              ].join(" ")}
+            >
+              <p
                 className={[
-                  "absolute right-2 top-2 rounded-md bg-mediaCard-badge px-2 py-1 transition-colors",
+                  "text-center text-xs font-bold text-mediaCard-badgeText transition-colors",
+                  closable ? "" : "group-hover:text-white",
                 ].join(" ")}
               >
-                <p
-                  className={[
-                    "text-center text-xs font-bold text-mediaCard-badgeText transition-colors",
-                    closable ? "" : "group-hover:text-white",
-                  ].join(" ")}
-                >
-                  {t("media.episodeDisplay", {
-                    season: series.season || 1,
-                    episode: series.episode,
-                  })}
-                </p>
-              </div>
-            ) : null}
-
-            {percentage !== undefined ? (
-              <>
-                <div
-                  className={`absolute inset-x-0 -bottom-px pb-1 h-12 bg-gradient-to-t from-mediaCard-shadow to-transparent transition-colors ${
-                    canLink ? "group-hover:from-mediaCard-hoverShadow" : ""
-                  }`}
-                />
-                <div
-                  className={`absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-mediaCard-shadow to-transparent transition-colors ${
-                    canLink ? "group-hover:from-mediaCard-hoverShadow" : ""
-                  }`}
-                />
-                <div className="absolute inset-x-0 bottom-0 p-3">
-                  <div className="relative h-1 overflow-hidden rounded-full bg-mediaCard-barColor">
-                    <div
-                      className="absolute inset-y-0 left-0 rounded-full bg-mediaCard-barFillColor"
-                      style={{
-                        width: percentageString,
-                      }}
-                    />
-                  </div>
-                </div>
-              </>
-            ) : null}
-
-            {searchQuery.length > 0 ? (
-              <div className="absolute" onClick={(e) => e.preventDefault()}>
-                <MediaBookmarkButton media={media} />
-              </div>
-            ) : null}
-
-            <div
-              className={`absolute inset-0 flex items-center justify-center bg-mediaCard-badge bg-opacity-80 transition-opacity duration-500 ${
-                closable ? "opacity-100" : "pointer-events-none opacity-0"
-              }`}
-            >
-              <IconPatch
-                clickable
-                className="text-2xl text-mediaCard-badgeText transition-transform hover:scale-110 duration-500"
-                onClick={() => closable && onClose?.()}
-                icon={Icons.X}
-              />
+                {t("media.episodeDisplay", {
+                  season: series.season || 1,
+                  episode: series.episode,
+                })}
+              </p>
             </div>
-          </div>
-          <h1 className="mb-1 line-clamp-3 max-h-[4.5rem] text-ellipsis break-words font-bold text-white">
-            <span>{media.title}</span>
-          </h1>
-          <div className="media-info-container justify-content-center flex flex-wrap">
-            <DotList className="text-xs" content={dotListContent} />
-            <button
-              className="info-button"
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
+          ) : null}
 
-                const searchParam = encodeURIComponent(encodeURI(media.id));
-                const url =
-                  media.type === "movie"
-                    ? `https://www.themoviedb.org/movie/${searchParam}`
-                    : `https://www.themoviedb.org/tv/${searchParam}`;
-
-                window.open(url, "_blank");
-              }}
-            >
-              <Icon
-                className="text-xs font-semibold text-type-secondary"
-                icon={Icons.CIRCLE_QUESTION}
+          {percentage !== undefined ? (
+            <>
+              <div
+                className={`absolute inset-x-0 -bottom-px pb-1 h-12 bg-gradient-to-t from-mediaCard-shadow to-transparent transition-colors ${
+                  canLink ? "group-hover:from-mediaCard-hoverShadow" : ""
+                }`}
               />
-            </button>
+              <div
+                className={`absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-mediaCard-shadow to-transparent transition-colors ${
+                  canLink ? "group-hover:from-mediaCard-hoverShadow" : ""
+                }`}
+              />
+              <div className="absolute inset-x-0 bottom-0 p-3">
+                <div className="relative h-1 overflow-hidden rounded-full bg-mediaCard-barColor">
+                  <div
+                    className="absolute inset-y-0 left-0 rounded-full bg-mediaCard-barFillColor"
+                    style={{
+                      width: percentageString,
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          ) : null}
+
+          {searchQuery.length > 0 ? (
+            <div className="absolute" onClick={(e) => e.preventDefault()}>
+              <MediaBookmarkButton media={media} />
+            </div>
+          ) : null}
+
+          <div
+            className={`absolute inset-0 flex items-center justify-center bg-mediaCard-badge bg-opacity-80 transition-opacity duration-500 ${
+              closable ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+          >
+            <IconPatch
+              clickable
+              className="text-2xl text-mediaCard-badgeText transition-transform hover:scale-110 duration-500"
+              onClick={() => closable && onClose?.()}
+              icon={Icons.X}
+            />
           </div>
-        </Flare.Child>
-      </div>
+        </div>
+        <h1 className="mb-1 line-clamp-3 max-h-[4.5rem] text-ellipsis break-words font-bold text-white">
+          <span>{media.title}</span>
+        </h1>
+        <div className="media-info-container justify-content-center flex flex-wrap">
+          <DotList className="text-xs" content={dotListContent} />
+          <button
+            className="info-button"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+
+              const searchParam = encodeURIComponent(encodeURI(media.id));
+              const url =
+                media.type === "movie"
+                  ? `https://www.themoviedb.org/movie/${searchParam}`
+                  : `https://www.themoviedb.org/tv/${searchParam}`;
+
+              window.open(url, "_blank");
+            }}
+          >
+            <Icon
+              className="text-xs font-semibold text-type-secondary"
+              icon={Icons.CIRCLE_QUESTION}
+            />
+          </button>
+        </div>
+      </Flare.Child>
     </Flare.Base>
   );
 }
 
 export function MediaCard(props: MediaCardProps) {
   const content = <MediaCardContent {...props} />;
-  const pressTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const isReleased = useCallback(
     () => checkReleased(props.media),
@@ -234,36 +218,6 @@ export function MediaCard(props: MediaCardProps) {
     }
   }
 
-  const handleLongPress = () => {
-    // Programmatically click the edit button
-    const editButton = document.getElementById("edit-button");
-    if (editButton) {
-      (editButton as HTMLButtonElement).click();
-    }
-  };
-
-  const handleTouchStart = () => {
-    pressTimerRef.current = setTimeout(handleLongPress, LONG_PRESS_DURATION);
-  };
-
-  const handleTouchEnd = () => {
-    if (pressTimerRef.current) {
-      clearTimeout(pressTimerRef.current);
-      pressTimerRef.current = null;
-    }
-  };
-
-  const handleMouseDown = () => {
-    pressTimerRef.current = setTimeout(handleLongPress, LONG_PRESS_DURATION);
-  };
-
-  const handleMouseUp = () => {
-    if (pressTimerRef.current) {
-      clearTimeout(pressTimerRef.current);
-      pressTimerRef.current = null;
-    }
-  };
-
   if (!canLink) return <span>{content}</span>;
   return (
     <Link
@@ -273,10 +227,6 @@ export function MediaCard(props: MediaCardProps) {
         "tabbable",
         props.closable ? "hover:cursor-default" : "",
       )}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
     >
       {content}
     </Link>
