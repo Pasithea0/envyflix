@@ -24,7 +24,6 @@ import { PageTitle } from "./parts/util/PageTitle";
 import { Icon, Icons } from "../components/Icon";
 
 const editorPicks = [
-  { id: 1434, type: "tv" }, // Family Guy
   { id: 9342, type: "movie" }, // The Mask of Zorro
   { id: 293, type: "movie" }, // A River Runs Through It
   { id: 370172, type: "movie" }, // No Time To Die
@@ -36,12 +35,13 @@ const editorPicks = [
   { id: 27205, type: "movie" }, // Inception
   { id: 106646, type: "movie" }, // The Wolf of Wall Street
   { id: 334533, type: "movie" }, // Captain Fantastic
-  { id: 74577, type: "tv" }, // The End of the F***ing World
   { id: 693134, type: "movie" }, // Dune: Part Two
   { id: 765245, type: "movie" }, // Swan Song
   { id: 264660, type: "movie" }, // Ex Machina
   { id: 86831, type: "tv" }, // Love, Death & Robots
   { id: 92591, type: "movie" }, // Bernie
+  { id: 976893, type: "movie" }, // Perfect Days
+  { id: 197125, type: "tv" }, // Constellation
 ];
 
 export function Discover() {
