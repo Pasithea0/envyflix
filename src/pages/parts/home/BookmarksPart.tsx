@@ -52,7 +52,13 @@ export function BookmarksPart({
   if (items.length === 0) return null;
 
   return (
-    <div>
+    <div
+      className="relative"
+      onContextMenu={(e: React.MouseEvent<HTMLDivElement>) =>
+        e.preventDefault()
+      } // Prevent right-click context menu
+      onTouchStart={(e: React.TouchEvent<HTMLDivElement>) => e.preventDefault()} // Prevent long press context menu on mobile
+    >
       <SectionHeading
         title={t("home.bookmarks.sectionTitle") || "Bookmarks"}
         icon={Icons.BOOKMARK}
