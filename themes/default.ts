@@ -46,7 +46,7 @@ const tokens = {
     c900: "#0B0B13", // Not currently used
   },
   purple: {
-    c50: "#D5AAFF", // Link hover
+    c50: "#D5AAFF", // Link hover, settings tabs titles/text
     c100: "#C082FF", // Link, logo text, video player audio set
     c200: "#A359EC", // Progress filled, video player scraping loading, video player context accent
     c300: "#8D44D6", // Toggle button, onboarding bar filled
