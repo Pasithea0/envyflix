@@ -1,4 +1,4 @@
-const useCustomHex = "#000000";
+import { useThemeStore } from "@/stores/theme";
 
 function hexToHue(hex: string) {
   // Convert hex to RGB
@@ -31,6 +31,9 @@ function hexToHue(hex: string) {
 }
 
 export const useCustomHueValue = () => {
-  const hue = hexToHue(useCustomHex);
+  // Get customHue from the store
+  const customHue = useThemeStore((state) => state.customHue) || "#000000";
+  const hue = hexToHue(customHue);
+
   return hue;
 };

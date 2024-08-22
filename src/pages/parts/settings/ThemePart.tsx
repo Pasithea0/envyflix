@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { Icon, Icons } from "@/components/Icon";
 import { Heading1 } from "@/components/utils/Text";
+import { useCustomHueValue } from "@/hooks/useCustomHue";
 
 const availableThemes = [
   {
@@ -142,6 +143,7 @@ function ThemePreview(props: {
           )}
         >
           {t("settings.appearance.activeTheme")}
+          Hue: {useCustomHueValue()}
         </span>
       </div>
     </div>
