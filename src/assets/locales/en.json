@@ -565,7 +565,8 @@
         "gray": "Gray",
         "red": "Red",
         "teal": "Teal",
-        "blck": "BLCK"
+        "blck": "BLCK",
+        "custom": "Custom"
       },
       "title": "Appearance"
     },

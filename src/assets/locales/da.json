@@ -541,7 +541,8 @@
         "gray": "Grå",
         "red": "Rød",
         "teal": "Blågrøn",
-        "blck": "BLCK"
+        "blck": "BLCK",
+        "custom": "custom"
       },
       "title": "Udseende"
     },
