@@ -7,6 +7,8 @@ import { immer } from "zustand/middleware/immer";
 export interface ThemeStore {
   theme: string | null;
   setTheme(v: string | null): void;
+  customHue: string; // New prop for current custom hue
+  setCustomHue(v: string): void; // New prop for hue change
 }
 
 const currentDate = new Date();
@@ -16,9 +18,15 @@ export const useThemeStore = create(
   persist(
     immer<ThemeStore>((set) => ({
       theme: is420 ? "teal" : null,
+      customHue: "", // Initialize custom hue as an empty string
       setTheme(v) {
         set((s) => {
           s.theme = v;
+        });
+      },
+      setCustomHue(v) {
+        set((s) => {
+          s.customHue = v;
         });
       },
     })),

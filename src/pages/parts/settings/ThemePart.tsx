@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon, Icons } from "@/components/Icon";
@@ -48,6 +49,9 @@ function ThemePreview(props: {
   inUse?: boolean;
   name: string;
   onClick?: () => void;
+  isCustom?: boolean;
+  onHueChange?: (hue: string) => void;
+  customHue?: string; // Add this prop
 }) {
   const { t } = useTranslation();
 
@@ -119,6 +123,15 @@ function ThemePreview(props: {
             </div>
           </div>
         </div>
+        {/* Hue picker for custom theme */}
+        {props.isCustom && (
+          <input
+            type="color"
+            value={props.customHue} // Use the customHue prop here
+            onChange={(e) => props.onHueChange?.(e.target.value)}
+            className="absolute bottom-2 right-2 w-8 h-8 rounded-full border-none outline-none cursor-pointer"
+          />
+        )}
       </div>
       <div className="mt-2 flex justify-between items-center">
         <span className="font-medium text-white">{props.name}</span>
@@ -139,6 +152,8 @@ export function ThemePart(props: {
   active: string;
   inUse: string;
   setTheme: (theme: string) => void;
+  customHue: string;
+  setCustomHue: (hue: string) => void;
 }) {
   const { t } = useTranslation();
 
@@ -153,7 +168,10 @@ export function ThemePart(props: {
             inUse={props.inUse === v.id}
             name={t(v.key)}
             key={v.id}
+            isCustom={v.id === "custom"}
             onClick={() => props.setTheme(v.id)}
+            customHue={props.customHue}
+            onHueChange={props.setCustomHue}
           />
         ))}
       </div>

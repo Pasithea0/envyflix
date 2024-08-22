@@ -156,6 +156,9 @@ export function SettingsPage() {
     sourceOrder,
   );
 
+  const customHue = useThemeStore((s) => s.customHue);
+  const setCustomHue = useThemeStore((s) => s.setCustomHue);
+
   const availableSources = useMemo(() => {
     const sources = getAllProviders().listSources();
     const sourceIDs = sources.map((s) => s.id);
@@ -310,6 +313,8 @@ export function SettingsPage() {
             active={previewTheme ?? "default"}
             inUse={activeTheme ?? "default"}
             setTheme={setThemeWithPreview}
+            setCustomHue={setCustomHue}
+            customHue={customHue}
           />
         </div>
         <div id="settings-captions" className="mt-48">
