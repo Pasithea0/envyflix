@@ -1,9 +1,16 @@
-# Sudo-Flix
-[![Sudo-Flix Image](.github/Sudo-Flix.png)](https://docs.undi.rest)  
+# EnvyFlix
+[![EnvyFlix Image](.github/EnvyFlix.png)](https://envyflix.xyz)  
+
+## Envyflix is a fork of [sudo-flix](https://github.com/sussy-code/smov) with many QoL changes and new features. 
+
+#####  I created this fork to solve my peronal problems with sudo-flix as well as solve other user's issues. As this is just a fork, all docs (and proceding content here) are for sudo-flix. 
+If you would like to learn more about the features and changes I have made to EnvyFlix or want to send feedback, join the [EnvyFlix Discord](https://discord.gg/7z6znYgrTG).
 
 **I *do not* endorse piracy of any kind I simply enjoy programming and large user counts.**
 
-## Links And Resources
+---
+
+## Links And Resources (sudo-flix ⬇)
 | Service        | Link                                                             | Source Code                                              |
 |----------------|------------------------------------------------------------------|----------------------------------------------------------|
 | Sudo-Flix Docs | [sudo-docs](https://docs.undi.rest)                          | [source code](https://github.com/sussy-code/docs)        |
@@ -14,15 +21,6 @@
 | Weblate        | [sudo-weblate](https://docs.undi.rest/links/weblate)         | [source code](https://github.com/sussy-code/docs)        |
 
 ***I provide these if you are not able to host yourself, though I do encourage hosting the frontend.***
-
-
-## Referrers
-- [FMHY (Voted as #1 multi-server streaming site of 2024)](https://fmhy.net)
-- [Piracy Subreddit Megathread](https://www.reddit.com/r/Piracy/s/iymSloEpXn)
-- [Toon's Instances](https://erynith.github.io/movie-web-instances)
-- [Entertainment Empire](https://discord.gg/8NSDNEMfja)
-- Search Engines: DuckDuckGo, Bing, Google
-- Rentry.co
 
 
 ## Running Locally
@@ -52,4 +50,9 @@ git push  # Push to YOUR repository
 
 
 ## Contact Me
+EnvyFlix dev:
+**Email:** *[contact@envyflix.xyz](mailto:contact@envyflix.xyz)* 
+
+Or sudo-flix dev:
 **Email:** *[dev@sudo-flix.lol](mailto:dev@sudo-flix.lol)* 
+
