@@ -74,7 +74,51 @@ export function HeroPart({ setIsSticky, searchParams }: HeroPartProps) {
     <ThinContainer>
       <div className="mt-44 space-y-16 text-center">
         <div className="relative z-10 mb-16">
-          <HeroTitle className="mx-auto max-w-md">{title}</HeroTitle>
+          <div
+            className="mx-auto max-w-md p-4 rounded-xl bg-background-main bg-opacity-50"
+            role="alert"
+          >
+            <div className="pb-4">
+              <span className="text-4xl text-white text-center">⚠️</span>
+            </div>
+            <div>
+              <span className="text-sm font-bold text-white">
+                Beta Notice: This is the beta version of EnvyFlix
+              </span>
+            </div>
+            <span className="text-xs text-gray-300">
+              Please report any bugs/issues to the{" "}
+              <a
+                href="https://discord.gg/7z6znYgrTG"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <u>EnvyFlix Discord.</u>
+              </a>
+            </span>
+            <div>
+              <span className="text-xs text-gray">
+                Not here to test? Go back to{" "}
+                <a href="https://envyflix.xyz" target="_blank" rel="noreferrer">
+                  <u>envyflix.xyz</u>
+                </a>
+              </span>
+            </div>
+            <div>
+              <button
+                type="button"
+                className="text-xs text-blue-500 hover:text-blue-700 focus:outline-none"
+                onClick={() =>
+                  // eslint-disable-next-line no-alert
+                  alert(
+                    "Welcome to the EnvyFlix beta! Currently there are no beta features. However, please report any issues and bugs to the Discord and join to stay up to date on beta changes.",
+                  )
+                }
+              >
+                Learn more
+              </button>
+            </div>
+          </div>
         </div>
         <div className="relative h-20 z-30">
           <Sticky
