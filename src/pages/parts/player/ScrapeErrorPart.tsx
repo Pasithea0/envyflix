@@ -32,6 +32,18 @@ export function ScrapeErrorPart(props: ScrapeErrorPartProps) {
     useState<ExtensionStatus>("unknown");
   const navigate = useNavigate();
 
+  // Extract the title from the URL
+  const currentPath = location.pathname;
+  const pathSegments = currentPath.split("/");
+  const titleSegment = pathSegments[2];
+  const titleSegments = titleSegment.split("-").slice(3).join("-");
+
+  // Replace encoded spaces (%20) with hyphens
+  const decodedTitle = decodeURIComponent(titleSegments)
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+  const alternativeSiteUrl = `https://nv.envyflix.xyz/?title=${decodedTitle}`;
+
   const error = useMemo(() => {
     const data = props.data;
     let str = "";
@@ -134,6 +146,16 @@ export function ScrapeErrorPart(props: ScrapeErrorPartProps) {
         >
           {t("player.scraping.notFound.detailsButton")}
         </Button>
+        <div>
+          <Button
+            href={alternativeSiteUrl}
+            theme="secondary"
+            padding="md:px-12 p-2.5"
+            className="mt-6"
+          >
+            Search on alternative site
+          </Button>
+        </div>
       </ErrorContainer>
       {error ? (
         <ErrorCardInModal
