@@ -111,7 +111,7 @@ export function HeroPart({ setIsSticky, searchParams }: HeroPartProps) {
                 onClick={() =>
                   // eslint-disable-next-line no-alert
                   alert(
-                    "Welcome to the EnvyFlix beta! Currently there are no beta features. However, please report any issues and bugs to the Discord and join to stay up to date on beta changes.",
+                    "Welcome to the EnvyFlix beta! Currently we are improving the new Discover page! Please report any issues and bugs to the Discord and join to stay up to date on beta changes.",
                   )
                 }
               >
