@@ -6,7 +6,7 @@ export interface HeroTitleProps {
 export function HeroTitle(props: HeroTitleProps) {
   return (
     <h1
-      className={`text-2xl font-bold text-white sm:text-3xl md:text-4xl ${
+      className={`text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 sm:text-3xl md:text-4xl ${
         props.className ?? ""
       }`}
     >
