@@ -5,3 +5,29 @@
 .hover\:flare-enabled:hover .flare-light {
   opacity: 1 !important;
 }
+
+.bookmark-button {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.group:hover .bookmark-button {
+  opacity: 1;
+}
+
+/* Ensure text is always visible on mobile */
+@media (max-width: 1024px) {
+  .group h1, .group button {
+    opacity: 1; /* Always visible on mobile */
+    position: relative; /* Make sure text is positioned correctly */
+  }
+
+  .group .group-hover\\:opacity-100 {
+    opacity: 1; /* Ensure the flare effect is always visible */
+  }
+}
+
+/* Adjust z-index if needed */
+.group .group-hover\\:opacity-100 {
+  z-index: 1; /* Ensure flare effect is on top */
+}
