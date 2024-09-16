@@ -18,6 +18,27 @@ import {
 
 import { Icon, Icons } from "../components/Icon";
 
+const editorPicks = [
+  { id: 9342, type: "movie" }, // The Mask of Zorro
+  { id: 293, type: "movie" }, // A River Runs Through It
+  { id: 370172, type: "movie" }, // No Time To Die
+  { id: 661374, type: "movie" }, // The Glass Onion
+  { id: 207, type: "movie" }, // Dead Poets Society
+  { id: 378785, type: "movie" }, // The Best of the Blues Brothers
+  { id: 335984, type: "movie" }, // Blade Runner 2049
+  { id: 13353, type: "movie" }, // It's the Great Pumpkin, Charlie Brown
+  { id: 27205, type: "movie" }, // Inception
+  { id: 106646, type: "movie" }, // The Wolf of Wall Street
+  { id: 334533, type: "movie" }, // Captain Fantastic
+  { id: 693134, type: "movie" }, // Dune: Part Two
+  { id: 765245, type: "movie" }, // Swan Song
+  { id: 264660, type: "movie" }, // Ex Machina
+  { id: 86831, type: "tv" }, // Love, Death & Robots
+  { id: 92591, type: "movie" }, // Bernie
+  { id: 976893, type: "movie" }, // Perfect Days
+  { id: 197125, type: "tv" }, // Constellation
+];
+
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -91,6 +112,45 @@ export function DiscoverContent() {
   const gradientRef = useRef<HTMLDivElement>(null);
   const [countdownTimeout, setCountdownTimeout] =
     useState<NodeJS.Timeout | null>(null);
+
+  const [editorPicksData, setEditorPicksData] = useState<Media[]>([]);
+
+  useEffect(() => {
+    // Function to shuffle array
+    const shuffleArray = (array: any[]) => {
+      for (let i = array.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    const fetchEditorPicks = async () => {
+      try {
+        // Shuffle the editorPicks array
+        const shuffledPicks = shuffleArray([...editorPicks]);
+
+        const promises = shuffledPicks.map(async (pick) => {
+          const endpoint =
+            pick.type === "movie" ? `/movie/${pick.id}` : `/tv/${pick.id}`;
+          const data = await get<any>(endpoint, {
+            api_key: conf().TMDB_READ_API_KEY,
+            language: "en-US",
+          });
+          return {
+            ...data,
+            type: pick.type,
+          };
+        });
+        const results = await Promise.all(promises);
+        setEditorPicksData(results);
+      } catch (error) {
+        console.error("Error fetching editor picks:", error);
+      }
+    };
+
+    fetchEditorPicks();
+  }, []);
 
   useEffect(() => {
     const fetchMoviesForCategory = async (category: Category) => {
@@ -347,11 +407,13 @@ export function DiscoverContent() {
     const displayCategory =
       category === "Now Playing"
         ? "In Cinemas"
-        : category.includes("Movie")
-          ? `${category}s`
-          : isTVShow
-            ? `${category} Shows`
-            : `${category} Movies`;
+        : category === "✨EnvyFlix Picks✨" // Check for "EnvyFlix Picks" specifically
+          ? category
+          : category.includes("Movie")
+            ? `${category}s`
+            : isTVShow
+              ? `${category} Shows`
+              : `${category} Movies`;
 
     // https://tailwindcss.com/docs/border-style
     return (
@@ -734,6 +796,21 @@ export function DiscoverContent() {
       </div>
       <div className="">
         <div className="flex items-center mt-5">
+          <Divider marginClass="mr-5" />
+          <h1 className="text-4xl font-bold text-white mx-auto">EnvyFlix</h1>
+          <Divider marginClass="ml-5" />
+        </div>
+        <div className="grid grid-cols-1 gap-0 mt-4">
+          {/* EnvyFlix Picks Section */}
+          <div className="">
+            {editorPicksData.length > 0 && (
+              <div className="">
+                {renderMovies(editorPicksData, "✨EnvyFlix Picks✨")}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center mt-10">
           <Divider marginClass="mr-5" />
           <h1 className="text-4xl font-bold text-white mx-auto">Movies</h1>
           <Divider marginClass="ml-5" />
