@@ -11,27 +11,6 @@ import { conf } from "@/setup/config";
 
 import { SubPageLayout } from "./layouts/SubPageLayout";
 
-function Button(props: {
-  className: string;
-  onClick?: () => void;
-  children: React.ReactNode;
-  disabled?: boolean;
-}) {
-  return (
-    <button
-      className={classNames(
-        "font-bold rounded h-10 w-40 scale-90 hover:scale-95 transition-all duration-200",
-        props.className,
-      )}
-      type="button"
-      onClick={props.onClick}
-      disabled={props.disabled}
-    >
-      {props.children}
-    </button>
-  );
-}
-
 // From about just removed the numbers
 export function Ol(props: { items: React.ReactNode[] }) {
   return (
@@ -91,27 +70,17 @@ export function SupportPage() {
               bold: <span className="font-bold" style={{ color: "#cfcfcf" }} />,
             }}
           />
-          <div className="pt-6">
-            <Button
-              className="py px-4 box-content bg-buttons-secondary hover:bg-buttons-secondaryHover bg-opacity-90 text-buttons-secondaryText justify-center items-center inline-block"
-              onClick={() =>
-                window.open("https://sussy-code.github.io/docs", "_blank")
-              }
-            >
-              EnvyFlix Docs
-            </Button>
-          </div>
         </Paragraph>
         <Ol
           items={[
             <Item title={t("support.q1.title")}>
               <Trans i18nKey="support.q1.body">
-                <MwLink to="https://docs.undi.rest/links/discord" />
+                <MwLink to={conf().DISCORD_LINK} />
               </Trans>
             </Item>,
             <Item title={t("support.q2.title")}>
               <Trans i18nKey="support.q2.body">
-                <MwLink to="https://github.com/sussy-code/smov" />
+                <MwLink to={conf().GITHUB_LINK} />
               </Trans>
             </Item>,
           ]}
