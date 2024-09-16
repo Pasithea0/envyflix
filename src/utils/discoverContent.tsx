@@ -492,28 +492,30 @@ export function DiscoverContent() {
             ))}
         </div>
 
-        <div className="flex items-center justify-center">
-          <button
-            type="button"
-            title="Back"
-            className="absolute left-5 top-1/2 transform -translate-y-3/4 z-10"
-            onClick={() => scrollCarousel(categorySlug, "left")}
-          >
-            <div className="cursor-pointer text-white flex justify-center items-center h-10 w-10 rounded-full bg-search-hoverBackground active:scale-110 transition-[transform,background-color] duration-200">
-              <Icon icon={Icons.ARROW_LEFT} />
-            </div>
-          </button>
-          <button
-            type="button"
-            title="Next"
-            className="absolute right-5 top-1/2 transform -translate-y-3/4 z-10"
-            onClick={() => scrollCarousel(categorySlug, "right")}
-          >
-            <div className="cursor-pointer text-white flex justify-center items-center h-10 w-10 rounded-full bg-search-hoverBackground active:scale-110 transition-[transform,background-color] duration-200">
-              <Icon icon={Icons.ARROW_RIGHT} />
-            </div>
-          </button>
-        </div>
+        {!isMobile && (
+          <div className="flex items-center justify-center">
+            <button
+              type="button"
+              title="Back"
+              className="absolute left-5 top-1/2 transform -translate-y-3/4 z-10"
+              onClick={() => scrollCarousel(categorySlug, "left")}
+            >
+              <div className="cursor-pointer text-white flex justify-center items-center h-10 w-10 rounded-full bg-search-hoverBackground active:scale-110 transition-[transform,background-color] duration-200">
+                <Icon icon={Icons.ARROW_LEFT} />
+              </div>
+            </button>
+            <button
+              type="button"
+              title="Next"
+              className="absolute right-5 top-1/2 transform -translate-y-3/4 z-10"
+              onClick={() => scrollCarousel(categorySlug, "right")}
+            >
+              <div className="cursor-pointer text-white flex justify-center items-center h-10 w-10 rounded-full bg-search-hoverBackground active:scale-110 transition-[transform,background-color] duration-200">
+                <Icon icon={Icons.ARROW_RIGHT} />
+              </div>
+            </button>
+          </div>
+        )}
       </div>
     );
   }
