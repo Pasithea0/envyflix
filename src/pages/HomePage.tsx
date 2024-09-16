@@ -72,15 +72,13 @@ export function HomePage() {
             </div>
             {!(showBookmarks || showWatching) ? (
               <div className="flex flex-col items-center justify-center">
-                <p className="text-[18.5px] pb-3 -translate-y-[40px]">
-                  {emptyText}
-                </p>
+                <p className="text-[18.5px] -translate-y-[40px]">{emptyText}</p>
               </div>
             ) : null}
           </>
         )}
       </WideContainer>
-      <div className="pt-4 px-0 w-full max-w-[100dvw] justify-center items-center">
+      <div className="pt-7 px-0 w-full max-w-[100dvw] justify-center items-center">
         <DiscoverContent />
       </div>
     </HomeLayout>
