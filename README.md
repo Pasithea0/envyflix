@@ -1,5 +1,5 @@
 # EnvyFlix
-[![EnvyFlix Image](.github/EnvyFlix.png)](https://envyflix.xyz)  
+![EnvyFlix Image](.github/EnvyFlix.png)
 
 ## Envyflix is a fork of [sudo-flix](https://github.com/sussy-code/smov) with many QoL changes and new features. 
 
@@ -50,8 +50,6 @@ git push  # Push to YOUR repository
 
 
 ## Contact Me
-EnvyFlix dev:
-**Email:** *[contact@envyflix.xyz](mailto:contact@envyflix.xyz)* 
 
 Or sudo-flix dev:
 **Email:** *[dev@sudo-flix.lol](mailto:dev@sudo-flix.lol)* 
